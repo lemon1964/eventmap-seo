@@ -1,0 +1,9 @@
+<!-- public/event-placeholder.svg -->
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="32" fill="#EEF2FF"/>
+  <circle cx="320" cy="150" r="52" fill="#CBD5E1"/>
+  <path d="M210 270L285 205L340 250L385 215L450 270H210Z" fill="#94A3B8"/>
+  <text x="320" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#64748B">
+    EventMap
+  </text>
+</svg>
