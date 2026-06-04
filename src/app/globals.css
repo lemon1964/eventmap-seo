@@ -770,6 +770,72 @@ code {
   text-align: center;
 }
 
+/* промо стили */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nav__inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.nav__links {
+  justify-content: center;
+}
+
+.nav__course-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  border: 1px solid #22c55e;
+  border-radius: 10px;
+  background: #22c55e;
+  color: #052e16;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  user-select: none;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    transform 80ms ease;
+}
+
+.nav__course-link:hover {
+  border-color: #16a34a;
+  background: #16a34a;
+  color: #052e16;
+}
+
+.nav__course-link:active {
+  transform: translateY(1px);
+}
+
+.nav__audio-toggle {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  transition: color 160ms ease;
+}
+
+.nav__audio-toggle:hover {
+  color: var(--foreground);
+}
+
+
 @media (max-width: 760px) {
   .container {
     width: min(100% - 28px, 1280px);
@@ -780,14 +846,30 @@ code {
   }
 
   .nav__inner {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px 14px;
     padding: 14px 20px;
   }
 
+  .nav__brand {
+    flex: 1 0 100%;
+  }
+
+  .nav__actions {
+    order: 2;
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
   .nav__links {
+    order: 3;
+    flex-wrap: wrap;
     gap: 14px;
+    justify-content: flex-start;
   }
 
   .hero {

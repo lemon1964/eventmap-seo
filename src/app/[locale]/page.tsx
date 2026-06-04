@@ -3,26 +3,19 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import {
-  buildSearchHref,
-  searchCategories,
-} from "@/entities/search/searchFilters";
+import { buildSearchHref, searchCategories } from "@/entities/search/searchFilters";
 import { toNextMetadata } from "@/entities/seo/toNextMetadata";
 import { HomeEventsSection } from "@/features/events/HomeEventsSection";
-import {
-  getLocaleFromParams,
-  type LocaleParams,
-} from "@/shared/lib/localeParams";
+import { getLocaleFromParams, type LocaleParams } from "@/shared/lib/localeParams";
 import { buildHomeSeoPaths } from "@/entities/seo/seoPaths";
 import { SkeletonBlock } from "@/shared/ui/SkeletonBlock";
+import { TrackedLink } from "@/shared/ui/TrackedLink";
 
 type PageProps = {
   params: LocaleParams;
 };
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const locale = await getLocaleFromParams(params);
   const seoPaths = buildHomeSeoPaths(locale);
 
@@ -53,11 +46,7 @@ export default async function Home({ params }: PageProps) {
           </h1>
           <p className="hero__text">{t("hero.description")}</p>
 
-          <form
-            action={`/${locale}/search`}
-            className="home-search-form"
-            method="get"
-          >
+          <form action={`/${locale}/search`} className="home-search-form" method="get">
             <input
               aria-label={t("searchPlaceholder")}
               name="q"
@@ -75,6 +64,41 @@ export default async function Home({ params }: PageProps) {
         </div>
 
         <div className="app-cluster home-category-grid">
+          {searchCategories.map(category => {
+            const href = buildSearchHref({
+              filters: { category: category.slug },
+              locale,
+            });
+
+            const content = (
+              <>
+                <span aria-hidden="true">{category.icon}</span>
+                <strong>{category.label[locale]}</strong>
+              </>
+            );
+
+            if (category.slug === "music") {
+              return (
+                <TrackedLink
+                  className="app-chip home-category-card"
+                  event="Music"
+                  href={href}
+                  key={category.slug}
+                  src="EventMap Course"
+                >
+                  {content}
+                </TrackedLink>
+              );
+            }
+
+            return (
+              <Link className="app-chip home-category-card" href={href} key={category.slug}>
+                {content}
+              </Link>
+            );
+          })}
+        </div>
+        {/* <div className="app-cluster home-category-grid">
           {searchCategories.map((category) => (
             <Link
               className="app-chip home-category-card"
@@ -88,7 +112,7 @@ export default async function Home({ params }: PageProps) {
               <strong>{category.label[locale]}</strong>
             </Link>
           ))}
-        </div>
+        </div> */}
       </section>
 
       <Suspense
