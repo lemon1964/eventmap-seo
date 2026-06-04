@@ -6,16 +6,28 @@ import {
   getLocaleFromParams,
   type LocaleParams,
 } from "@/shared/lib/localeParams";
+import { siteConfig } from "@/entities/seo/siteConfig";
 import { PageShell } from "@/shared/ui/PageShell";
 import "../globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: "EventMap",
     template: "%s | EventMap",
   },
   description: "Find live events, concerts, sports, theatre and film.",
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+  },
 };
+// export const metadata: Metadata = {
+//   title: {
+//     default: "EventMap",
+//     template: "%s | EventMap",
+//   },
+//   description: "Find live events, concerts, sports, theatre and film.",
+// };
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
