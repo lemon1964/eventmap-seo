@@ -4,10 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const reportPlayError = (error: unknown) => {
-  const message =
-    error instanceof DOMException
-      ? `${error.name}: ${error.message}`
-      : String(error);
+  const message = error instanceof DOMException ? `${error.name}: ${error.message}` : String(error);
 
   window.alert(message);
 };
@@ -28,7 +25,7 @@ export function AudioToggle() {
         .play()
         .then(() => setPlaying(true))
         .catch(reportPlayError);
-        // .catch(() => {});
+      // .catch(() => {});
     };
 
     document.body.addEventListener("click", tryPlay, { once: true });
@@ -59,9 +56,7 @@ export function AudioToggle() {
       if (!href) return;
 
       const isSpecialScheme =
-        href.startsWith("mailto:") ||
-        href.startsWith("tel:") ||
-        href.startsWith("sms:");
+        href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("sms:");
 
       let isExternal = false;
 
@@ -98,7 +93,12 @@ export function AudioToggle() {
   }, []);
 
   const toggleAudio = () => {
-    if (!audioRef.current) return;
+    window.alert("AudioToggle: click received");
+
+    if (!audioRef.current) {
+      window.alert("AudioToggle: audioRef is empty");
+      return;
+    }
 
     if (playing) {
       stopAudio();
@@ -107,10 +107,30 @@ export function AudioToggle() {
 
     audioRef.current
       .play()
-      .then(() => setPlaying(true))
-      .catch(reportPlayError);
-      // .catch(() => {});
+      .then(() => {
+        window.alert("AudioToggle: play resolved");
+        setPlaying(true);
+      })
+      .catch((error: unknown) => {
+        const message = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+
+        window.alert(`AudioToggle: play rejected\n${message}`);
+      });
   };
+  // const toggleAudio = () => {
+  //   if (!audioRef.current) return;
+
+  //   if (playing) {
+  //     stopAudio();
+  //     return;
+  //   }
+
+  //   audioRef.current
+  //     .play()
+  //     .then(() => setPlaying(true))
+  //     .catch(reportPlayError);
+  //     // .catch(() => {});
+  // };
 
   return (
     <button
