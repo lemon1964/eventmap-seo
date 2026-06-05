@@ -3,6 +3,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const reportPlayError = (error: unknown) => {
+  const message =
+    error instanceof DOMException
+      ? `${error.name}: ${error.message}`
+      : String(error);
+
+  window.alert(message);
+};
+
 export function AudioToggle() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
@@ -18,7 +27,8 @@ export function AudioToggle() {
       audioRef.current
         .play()
         .then(() => setPlaying(true))
-        .catch(() => {});
+        .catch(reportPlayError);
+        // .catch(() => {});
     };
 
     document.body.addEventListener("click", tryPlay, { once: true });
@@ -98,7 +108,8 @@ export function AudioToggle() {
     audioRef.current
       .play()
       .then(() => setPlaying(true))
-      .catch(() => {});
+      .catch(reportPlayError);
+      // .catch(() => {});
   };
 
   return (
