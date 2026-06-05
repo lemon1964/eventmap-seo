@@ -10,7 +10,7 @@ export function AudioToggle() {
   useEffect(() => {
     audioRef.current = new Audio("/audio/instrumental.mp3");
     audioRef.current.loop = true;
-    // audioRef.current.volume = 0.35;
+    audioRef.current.volume = 0.35;
 
     const tryPlay = () => {
       if (!audioRef.current || playing) return;
@@ -104,7 +104,7 @@ export function AudioToggle() {
   return (
     <button
       type="button"
-      className="nav__audio-toggle"
+      // className="nav__audio-toggle"
       onClick={toggleAudio}
       aria-label={playing ? "Выключить музыку" : "Включить музыку"}
       title={playing ? "Выключить музыку" : "Включить музыку"}
