@@ -10,7 +10,7 @@ export function AudioToggle() {
   useEffect(() => {
     audioRef.current = new Audio("/audio/instrumental.mp3");
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.35;
+    // audioRef.current.volume = 0.35;
 
     const tryPlay = () => {
       if (!audioRef.current || playing) return;

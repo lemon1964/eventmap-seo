@@ -3,7 +3,7 @@
 
 import { track } from "@/shared/lib/track";
 
-const COURSE_URL = "https://stepik.org/a/286841";
+const COURSE_URL = "https://stepik.org/a/286841/pay?promo=5ac9cd379a3bc446";
 const TRACK_SRC = "EventMap Course";
 
 export function CourseLink() {
