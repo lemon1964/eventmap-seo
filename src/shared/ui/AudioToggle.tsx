@@ -104,7 +104,7 @@ export function AudioToggle() {
   return (
     <button
       type="button"
-      // className="nav__audio-toggle"
+      className="nav__audio-toggle"
       onClick={toggleAudio}
       aria-label={playing ? "Выключить музыку" : "Включить музыку"}
       title={playing ? "Выключить музыку" : "Включить музыку"}
